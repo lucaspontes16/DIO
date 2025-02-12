@@ -1,0 +1,160 @@
+--------------Desafio Ransomware Lucas Pontes -----------------
+
+	This file contains all the steps required to complete the ransomware challenge. There are more steps than the expected because I had to install the pye library.
+
+---- Using root user -----
+┌──(kali㉿kali)-[~]
+└─$ sudo su
+[sudo] password for kali: 
+┌──(root㉿kali)-[/home/kali]
+└─# mkdir projecto-ransomware
+                          
+----- navigate to the folder -----
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali]
+└─# cd projecto-ransomware            
+ 
+---- Creating teste.txt--------                                                                            
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# touch teste.txt
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# ls
+teste.txt
+
+---- Alter teste.txt -------                                                                            
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# nano teste.txt
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# ls
+teste.txt
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# ls
+decrypter.py  encrypter.py  teste.txt
+   
+----- Trying to open encrypter.py -------                                                                          
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# python encrypter.py
+Traceback (most recent call last):
+  File "/home/kali/projecto-ransomware/encrypter.py", line 2, in <module>
+    import pyaes
+ModuleNotFoundError: No module named 'pyaes'
+
+----- Any pyaes module found -----------
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# python encrypter.py
+Traceback (most recent call last):
+  File "/home/kali/projecto-ransomware/encrypter.py", line 2, in <module>
+    import pyaes
+ModuleNotFoundError: No module named 'pyaes'
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# 
+ 
+----------Checking python version --------
+                                                                            
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# python3 --version
+pip3 --version
+
+Python 3.12.7
+pip 24.3.1 from /usr/lib/python3/dist-packages/pip (python 3.12)
+ 
+
+---- trying to install throughout pip3 ----------                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# pip3 install pyaes
+
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+    
+    If you wish to install a non-Kali-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have pypy3-venv installed.
+    
+    If you wish to install a non-Kali-packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+    
+    For more information, refer to the following:
+    * https://www.kali.org/docs/general-use/python3-external-packages/
+    * /usr/share/doc/python3.12/README.venv
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# 
+source venv/bin/activate
+pip install pyaes
+
+source: no such file or directory: venv/bin/activate
+error: externally-managed-environment
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try apt install
+    python3-xyz, where xyz is the package you are trying to
+    install.
+    
+    If you wish to install a non-Kali-packaged Python package,
+    create a virtual environment using python3 -m venv path/to/venv.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+    sure you have pypy3-venv installed.
+    
+    If you wish to install a non-Kali-packaged Python application,
+    it may be easiest to use pipx install xyz, which will manage a
+    virtual environment for you. Make sure you have pipx installed.
+    
+    For more information, refer to the following:
+    * https://www.kali.org/docs/general-use/python3-external-packages/
+    * /usr/share/doc/python3.12/README.venv
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
+                                                    
+--------- Installing pyaes using pip --break--system-packages  --------                         
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# pip install pyaes --break-system-packages
+
+Collecting pyaes
+  Downloading pyaes-1.6.1.tar.gz (28 kB)
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: pyaes
+  Building wheel for pyaes (setup.py) ... done
+  Created wheel for pyaes: filename=pyaes-1.6.1-py3-none-any.whl size=26346 sha256=bd7021106be5d10574ec66d2c2df08f63f7c23acf6e874644b1d75320f75123b
+  Stored in directory: /root/.cache/pip/wheels/d9/43/32/ec313dd557e88e419489b9df40c04dad7b99576bde162496f8
+Successfully built pyaes
+Installing collected packages: pyaes
+Successfully installed pyaes-1.6.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.                       
+   
+
+---- running encrypter.py---------------------                                                                          
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# python encrypter.py                      
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# ls
+decrypter.py  encrypter.py  teste.txt.ransomwaretroll
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# nano teste.txt
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# nano teste.txt.ransomwaretroll
+
+-----Running Decrypter.py -----------------------------
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# python decrypter.py
+                                                                             
+┌──(root㉿kali)-[/home/kali/projecto-ransomware]
+└─# ls
